@@ -30,3 +30,18 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
+- task: ArtifactoryGenericUpload@2
+  inputs:
+    artifactoryService: 'JFrog-StoryBook-Service-Connection'
+    specSource: 'taskConfiguration'
+    fileSpec: |
+      {
+        "files": [
+          {
+            "pattern": "*",
+            "target": "storybook-maven-remote"
+          }
+        ]
+      }
+    failNoOp: true
+    
