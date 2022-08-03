@@ -39,7 +39,7 @@ steps:
         "files": [
           {
             "pattern": "*",
-            "target": "storybook-maven-remote"
+            "target": "junitjrog-generic-local/"
           }
         ]
       }
