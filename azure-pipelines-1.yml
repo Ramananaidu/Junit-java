@@ -1,4 +1,5 @@
 # Maven
+
 # Build your Java project and run tests with Apache Maven.
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
@@ -29,4 +30,18 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'webapp'
     publishLocation: 'Container'
+- task: ArtifactoryGenericUpload@2
+  inputs:
+    artifactoryService: 'JFrog-StoryBook-Service-Connection'
+    specSource: 'taskConfiguration'
+    fileSpec: |
+      {
+        "files": [
+          {
+            "pattern": "*.war",
+            "target": "storybook-maven-remote/"
+          }
+        ]
+      }
+    failNoOp: true
     
